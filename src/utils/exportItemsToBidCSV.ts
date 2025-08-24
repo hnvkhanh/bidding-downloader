@@ -1,18 +1,14 @@
 import type { Item } from "@/configs/types";
 
-import fs from "fs";
 
 interface ExportItemsToCSVArg {
-  items: Item[],
-  filePath: string,
-  contractorName: string
+  items: Item[];
+  contractorName: string;
 }
 
 export function exportItemsToBidCSV(
-  { items,
-    filePath,
-    contractorName }: ExportItemsToCSVArg
-  ): void {
+  { items, contractorName }: ExportItemsToCSVArg
+): string {
   // Excel headers (Vietnamese)
   const headers = [
     "STT",
@@ -34,7 +30,7 @@ export function exportItemsToBidCSV(
   ];
 
   const csvRows: string[] = [];
-  csvRows.push(headers.join(",")); // header row
+  csvRows.push(headers.map(h => `"${h.replace(/"/g, '""')}"`).join(",")); // header row
 
   items.forEach((item, idx) => {
     const row = [
@@ -59,5 +55,5 @@ export function exportItemsToBidCSV(
     csvRows.push(row.join(","));
   });
 
-  fs.writeFileSync(filePath, csvRows.join("\n"), "utf-8");
+  return csvRows.join("\n");
 }
