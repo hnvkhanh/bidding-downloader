@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { toast } from "sonner"
 import { Toaster } from "@/components/ui/sonner"
-import { getAllBiddingGoods } from "@/utils/fetch"
+import getAllBiddingGoods from "@/utils/fetch"
 
 const Form = () => {
   const [keyword, setKeyword] = useState("")
