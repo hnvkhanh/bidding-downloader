@@ -5,12 +5,12 @@ import type React from "react"
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Download, Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { Toaster } from "@/components/ui/sonner"
 import getAllBiddingGoods from "@/utils/fetch"
+import { Textarea } from "../ui/textarea"
 
 const downloadFile = (url: string, filename: string) => {
   const link = document.createElement("a")
@@ -67,29 +67,30 @@ const Form = () => {
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="keyword">Keyword</Label>
-              <Input
-                id="keyword"
-                placeholder="Enter search keyword"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-              />
-            </div>
-
-            <div className="space-y-2">
               <Label htmlFor="token">API Token</Label>
-              <Input
+              <Textarea
                 id="token"
-                type="password"
+                className="w-full border rounded p-2"
                 placeholder="Enter your API token"
                 value={token}
                 onChange={(e) => setToken(e.target.value)}
               />
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="query">Query</Label>
+              <Textarea
+                id="query"
+                className="w-full border rounded p-2"
+                placeholder="Enter your query"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+              />
+            </div>
           </CardContent>
 
           <CardFooter>
-            <Button type="submit" className="w-full mt-4" disabled={isLoading}>
+            <Button type="submit" className="w-full mt-8" disabled={isLoading}>
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
