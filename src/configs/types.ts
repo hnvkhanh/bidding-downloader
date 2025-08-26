@@ -12,11 +12,17 @@ export interface FetchSinglePage {
 
 export interface LotResultItem {
   formValue: string;
+  contractorName: string;
+  contractorCode: string;
+  notifyNo: string;
+  procuringEntityName: string;
 }
 
 export interface BiddingGoodsResponse {
   bideContractorInputResultDTO: {
     lotResultItems: LotResultItem[];
+    notifyNo: string;
+    procuringEntityName: string;
   };
 }
 
@@ -77,6 +83,9 @@ export interface Item {
   maHS?: string;
   lotPrice?: number;
   lotWiningPrice?: number;
+  contractorName: string;
+  notifyNo: string;
+  procuringEntityName: string;
 
   // allow additional keys
   [key: string]: unknown;

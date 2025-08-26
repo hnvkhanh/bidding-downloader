@@ -29,12 +29,6 @@ const Form = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Validate inputs
-    if (!keyword.trim()) {
-      toast("Error: Please enter a keyword")
-      return
-    }
-
     if (!token.trim()) {
       toast("Error: Please enter a token")
       return

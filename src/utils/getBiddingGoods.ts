@@ -1,11 +1,11 @@
-import { TOKEN_BIDDING_GOODS } from "@/configs/core";
+import { TOKEN } from "@/configs/core";
 import type { BiddingGoodsResponse, Item, LotResultItem } from "@/configs/types";
 import { sleep } from "./helpers";
 import { parseItems } from "./parseItems";
 
 const getBiddingGoods = async (id: string): Promise<Item[]> => {
   await sleep(1000); // Throttle requests to avoid overwhelming the server
-  const response = await fetch(`/api/services/expose/contractor-input-result/get?token=${TOKEN_BIDDING_GOODS}`, {
+  const response = await fetch(`/api/services/expose/contractor-input-result/get?token=${TOKEN}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,7 +18,18 @@ const getBiddingGoods = async (id: string): Promise<Item[]> => {
 
   const data: BiddingGoodsResponse = await response.json();
   const lotResultItems = data.bideContractorInputResultDTO.lotResultItems || [];
-  const items = lotResultItems.map((item: LotResultItem) => parseItems(item.formValue));
+  const notifyNo = data.bideContractorInputResultDTO.notifyNo || '';
+  const procuringEntityName = data.bideContractorInputResultDTO.procuringEntityName || '';
+  const items = lotResultItems.map((item: LotResultItem) => {
+    const formValues = parseItems(item.formValue);
+    return formValues.map((fv) => ({
+      ...fv,
+      contractorName: item.contractorName,
+      contractorCode: item.contractorCode,
+      notifyNo,
+      procuringEntityName
+    }));
+  });
   return items.flat();
 }
 
