@@ -1,4 +1,4 @@
-import parallelLimit from 'async/parallelLimit';
+import { parallelLimit } from 'async';
 
 import { PER_PAGE } from "@/configs/core";
 import getPage from './getPage';
