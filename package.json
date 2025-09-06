@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.8",
     "@types/async": "^3.2.25",
     "@types/node": "^24.3.1",
+    "@vercel/node": "^5.3.21",
     "async": "^3.2.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

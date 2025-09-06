@@ -25,7 +25,7 @@ const getAllBiddingGoods = async (query: string, token: string): Promise<string>
       break;
     }
   }
-  const tasks = allBiddingResultIds.map((id) => async () => getBiddingGoods(id));
+  const tasks = allBiddingResultIds.map((id) => async () => getBiddingGoods(id, token));
   const allBiddingGoods: Item[] = await parallelLimit(tasks, 5);
   const flattedBiddingGoods = allBiddingGoods.flat();
   const csvContent = exportItemsToBidCSV({
