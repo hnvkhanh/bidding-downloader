@@ -12,11 +12,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': {
+      '/api/proxy': {
         target: 'https://muasamcong.mpi.gov.vn/o/egp-portal-contractor-selection-v2', // Your backend origin
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api\/proxy/, ''),
       },
     },
   },

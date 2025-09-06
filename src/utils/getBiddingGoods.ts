@@ -4,7 +4,7 @@ import { parseItems } from "./parseItems";
 
 const getBiddingGoods = async (id: string, token: string): Promise<Item[]> => {
   await sleep(1000); // Throttle requests to avoid overwhelming the server
-  const response = await fetch(`/api/services/expose/contractor-input-result/get?token=${token}`, {
+  const response = await fetch(`/api/proxy/services/expose/contractor-input-result/get?token=${token}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

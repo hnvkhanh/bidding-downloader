@@ -1,7 +1,7 @@
 import type { FetchSinglePage, SearchResponse } from "@/configs/types";
 
 const getPage = async ({ query, page, token }: { query: object, page: number, token: string }): Promise<FetchSinglePage> => {
-  const response = await fetch(`/api/services/smart/search?token=${token}`, {
+  const response = await fetch(`/api/proxy/services/smart/search?token=${token}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
