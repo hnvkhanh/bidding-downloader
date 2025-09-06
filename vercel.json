@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/proxy/:path*",
+      "destination": "https://muasamcong.mpi.gov.vn/o/egp-portal-contractor-selection-v2/:path*"
+    }
+  ]
+}
