@@ -26,6 +26,8 @@ const HEADERS = [
   "Năm sản xuất",
   "Cấu hình, tính năng kỹ thuật cơ bản",
   "Mã HS",
+  "Đơn giá trúng thầu",
+  "Thành tiền trúng thầu",
   "Đơn giá dự thầu (đã bao gồm thuế, phí, lệ phí nếu có)",
   "Thành tiền (đã bao gồm thuế, phí, lệ phí nếu có)"
 ];
@@ -61,6 +63,8 @@ export function exportItemsToBidCSV(
       item.yearManufacture ?? "", // Năm sản xuất
       item.feature ?? "", // Cấu hình, tính năng kỹ thuật cơ bản
       item.maHS ?? "", // Mã HS
+      item.unitPrice ?? "", // Đơn giá trúng thầu
+      item.subTotal ?? "", // Thành tiền trúng thầu
       item.bidPrice ?? "", // Đơn giá dự thầu (đã bao gồm thuế, phí, lệ phí nếu có)
       item.amount ?? "" // Thành tiền (đã bao gồm thuế, phí, lệ phí nếu có)
     ].map(v => `"${String(v).replace(/"/g, '""')}"`); // Escape quotes for CSV

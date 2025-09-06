@@ -8,19 +8,19 @@ import type { Item } from '@/configs/types';
 import { exportItemsToBidCSV } from './exportItemsToBidCSV';
 
 
-const getAllBiddingGoods = async (): Promise<string> => {
+const getAllBiddingGoods = async (query: string, token: string): Promise<string> => {
   const allBiddingResultIds: string[] = [];
-  const { hasMore, content } = await getPage(0);
+  const parsedQuery = JSON.parse(query);
+  const { hasMore, content } = await getPage({ query: parsedQuery, page: 0, token });
   const biddingIds = getBiddingResultIds(content);
   allBiddingResultIds.push(...biddingIds);
 
   while (hasMore) {
     const nextPageNumber = Math.ceil(allBiddingResultIds.length / PER_PAGE);
     await sleep(1000); // Throttle requests to avoid overwhelming the server
-    const { hasMore, content } = await getPage(nextPageNumber);
+    const { hasMore, content } = await getPage({ query: parsedQuery, page: nextPageNumber, token });
     const biddingIds = getBiddingResultIds(content);
     allBiddingResultIds.push(...biddingIds);
-    break; // Remove this line if you want to continue fetching until no more pages
     if (!hasMore) {
       break;
     }
@@ -30,7 +30,6 @@ const getAllBiddingGoods = async (): Promise<string> => {
   const flattedBiddingGoods = allBiddingGoods.flat();
   const csvContent = exportItemsToBidCSV({
     items: flattedBiddingGoods,
-    contractorName: "Some Contractor"
   });
   return csvContent;
 }

@@ -22,7 +22,7 @@ const downloadFile = (url: string, filename: string) => {
 }
 
 const Form = () => {
-  const [keyword, setKeyword] = useState("")
+  const [query, setQuery] = useState("")
   const [token, setToken] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
@@ -37,7 +37,7 @@ const Form = () => {
     setIsLoading(true)
 
     try {
-      const csvContent = await getAllBiddingGoods()
+      const csvContent = await getAllBiddingGoods(query, token)
       // Create a blob
       const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
@@ -77,8 +77,8 @@ const Form = () => {
                 id="query"
                 className="w-full border rounded p-2"
                 placeholder="Enter your query"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
               />
             </div>
           </CardContent>
